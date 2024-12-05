@@ -22,4 +22,5 @@ public class ChiTietDon {
     private Sach sach;
 
     private Integer quantity;
+    private Double price;
 }

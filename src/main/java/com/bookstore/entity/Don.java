@@ -23,12 +23,5 @@ public class Don {
     @Column(name = "total_amount")
     private Double totalAmount;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
-    public enum Status {
-        Pending,
-        Completed,
-        Cancelled
-    }
+    private String status;
 }

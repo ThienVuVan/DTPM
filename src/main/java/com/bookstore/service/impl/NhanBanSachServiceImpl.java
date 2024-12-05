@@ -31,4 +31,9 @@ public class NhanBanSachServiceImpl implements NhanBanSachService {
     public NhanBanSach getById(Integer id) {
         return nhanBanSachRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public NhanBanSach findRandom() {
+        return nhanBanSachRepository.findFirstByOrderDetailIsNull();
+    }
 }

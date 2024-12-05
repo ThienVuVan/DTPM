@@ -10,4 +10,5 @@ public interface NhanBanSachService {
     public List<NhanBanSach> getAll();
     public List<NhanBanSach> getByBookId(Integer id);
     public NhanBanSach getById(Integer id);
+    public NhanBanSach findRandom();
 }
