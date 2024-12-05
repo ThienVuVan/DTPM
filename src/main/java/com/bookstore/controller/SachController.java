@@ -1,11 +1,14 @@
 package com.bookstore.controller;
 
+import com.bookstore.dto.NhanBanSachDto;
 import com.bookstore.dto.SachDto;
 import com.bookstore.entity.LoaiSach;
 import com.bookstore.entity.NhaXuatBan;
+import com.bookstore.entity.NhanBanSach;
 import com.bookstore.entity.Sach;
 import com.bookstore.service.LoaiSachService;
 import com.bookstore.service.NhaXuatBanService;
+import com.bookstore.service.NhanBanSachService;
 import com.bookstore.service.SachService;
 import com.bookstore.service.impl.SachServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +27,7 @@ public class SachController {
     private final SachServiceImpl sachService;
     private final NhaXuatBanService nhaXuatBanService;
     private final LoaiSachService loaiSachService;
+    private final NhanBanSachService nhanBanSachService;
 
     @GetMapping("/book")
     public ResponseEntity<?> RetrieveBooksByPage() {
@@ -79,5 +83,16 @@ public class SachController {
         }
         sachService.deleteSach(sach);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/book-copy")
+    public ResponseEntity<?> CreateNewBookCopy(@RequestBody NhanBanSachDto nhanBanSachDto) {
+        NhanBanSach nhanBanSach = new NhanBanSach();
+        nhanBanSach.setBookCondition(nhanBanSachDto.getBookCondition());
+        nhanBanSach.setIsbn(nhanBanSachDto.getIsbn());
+        Sach sach = sachService.retrieveById(nhanBanSachDto.getBookId());
+        nhanBanSach.setBook(sach);
+        nhanBanSachService.saveNhanBan(nhanBanSach);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 }
