@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,35 +20,21 @@ public class DonController {
     private final SachService sachService;
     private final NhanBanSachService nhanBanSachService;
 
-    // API lấy thông tin đơn hàng
-//    @GetMapping("/don")
-//    public ResponseEntity<DonDto> getOrderDetails(@RequestParam Integer orderId) {
-//        // Lấy đơn hàng từ service
-//        Don don = donService.retrieveById(orderId);
-//        // Lấy danh sách chi tiết đơn hàng
-//        List<ChiTietDon> chiTietDonList = chiTietDonService.findByOrderId(orderId);
-//
-//        // Chuyển đổi sang DTO
-//        DonDto donDto = new DonDto();
-//        donDto.setOrderId(don.getOrderId());
-//        donDto.setAccountId(don.getAccount().getAccountId());
-//        donDto.setDate(don.getOrderDate());
-//        donDto.setStatus(don.getStatus());
-//
-//        List<BookOrderDto> bookOrderDtoList = chiTietDonList.stream()
-//                .map(chiTiet -> {
-//                    BookOrderDto bookOrderDto = new BookOrderDto();
-//                    bookOrderDto.setBookId(chiTiet.getSach().getBookId());
-//                    bookOrderDto.setQuantity(chiTiet.getQuantity());
-//                    bookOrderDto.setPrice(chiTiet.getPrice());
-//                    return bookOrderDto;
-//                })
-//                .collect(Collectors.toList());
-//
-//        donDto.setBookOrderDtoList(bookOrderDtoList);
-//
-//        return ResponseEntity.ok(donDto);
-//    }
+    @GetMapping("/don")
+    public ResponseEntity<List<Don>> getOrder() {
+        // Lấy đơn hàng từ service
+        List<Don> donList = donService.getall();
+        return ResponseEntity.ok(donList);
+    }
+
+    @GetMapping("/don/chitiet")
+    public ResponseEntity<List<ChiTietDon>> getOrderDetails(@RequestParam Integer donID) {
+        // Lấy đơn hàng từ service
+        Don don = donService.retrieveById(donID);
+        List<ChiTietDon> chiTietDonList = chiTietDonService.getByDon(don);
+        return ResponseEntity.ok(chiTietDonList);
+    }
+
     @PostMapping("/don")
     public ResponseEntity<String> createOrder(@RequestBody DonDto donDto) {
             Don don = new Don();

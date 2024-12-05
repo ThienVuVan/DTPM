@@ -11,4 +11,5 @@ public interface DonService {
     public void deleteOrder(Don order);
     public Don retrieveById(Integer id);
     List<ChiTietDon> retrieveOrderItemsByOrderId(Integer orderId);
+    List<Don> getall();
 }

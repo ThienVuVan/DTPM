@@ -38,4 +38,9 @@ public class DonServiceImpl implements DonService {
     public List<ChiTietDon> retrieveOrderItemsByOrderId(Integer orderId) {
         return null;
     }
+
+    @Override
+    public List<Don> getall() {
+        return orderRepository.findAll();
+    }
 }
