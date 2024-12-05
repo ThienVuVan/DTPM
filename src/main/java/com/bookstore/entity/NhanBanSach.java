@@ -15,7 +15,11 @@ public class NhanBanSach {
 
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "book_id")
-    private Sach book;
+    private Sach sach;
+
+    @ManyToOne
+    @JoinColumn(name = "order_detail_id", referencedColumnName = "order_detail_id")
+    private ChiTietDon orderDetail;
 
     @Column(name = "book_condition")
     private String bookCondition;

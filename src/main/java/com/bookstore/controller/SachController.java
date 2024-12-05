@@ -91,7 +91,7 @@ public class SachController {
         nhanBanSach.setBookCondition(nhanBanSachDto.getBookCondition());
         nhanBanSach.setIsbn(nhanBanSachDto.getIsbn());
         Sach sach = sachService.retrieveById(nhanBanSachDto.getBookId());
-        nhanBanSach.setBook(sach);
+        nhanBanSach.setSach(sach);
         nhanBanSachService.saveNhanBan(nhanBanSach);
         return new ResponseEntity(HttpStatus.CREATED);
     }

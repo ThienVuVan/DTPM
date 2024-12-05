@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class NhanBanSachDto {
+    private Integer bookCopyId;
     private Integer bookId;
     private String isbn;
     private String bookCondition;

@@ -3,7 +3,11 @@ package com.bookstore.repository;
 import com.bookstore.entity.NhaXuatBan;
 import com.bookstore.entity.NhanBanSach;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface NhanBanSachRepository extends JpaRepository<NhanBanSach, Integer> {
-    NhanBanSach findNhanBanSachByBookCopyId(Integer id);
+    @Query("SELECT n FROM NhanBanSach n WHERE n.sach.bookId = ?1")
+    List<NhanBanSach> findNhanBanSachByBookId(Integer id);
 }
