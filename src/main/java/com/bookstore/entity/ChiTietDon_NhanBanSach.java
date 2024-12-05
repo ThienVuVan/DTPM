@@ -11,10 +11,10 @@ public class ChiTietDon_NhanBanSach {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "orderDetailId", referencedColumnName = "orderDetailId")
+    @JoinColumn(name = "order_detail_id", referencedColumnName = "order_detail_id")
     private ChiTietDon orderDetail;
 
     @ManyToOne
-    @JoinColumn(name = "bookCopyId", referencedColumnName = "bookCopyId")
+    @JoinColumn(name = "book_copy_id", referencedColumnName = "book_copy_id")
     private NhanBanSach bookCopyId;
 }

@@ -10,13 +10,17 @@ import java.time.LocalDateTime;
 public class Don {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
     private Integer orderId;
 
     @ManyToOne
-    @JoinColumn(name = "accountId", referencedColumnName = "accountId")
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private TaiKhoan account;
 
+    @Column(name = "order_date")
     private LocalDateTime orderDate;
+
+    @Column(name = "total_amount")
     private Double totalAmount;
 
     @Enumerated(EnumType.STRING)

@@ -9,4 +9,6 @@ public interface TaiKhoanService {
     public TaiKhoan retrieveById(Integer id);
     public TaiKhoan retrieveByEmail(String username);
     public TaiKhoan saveUser(TaiKhoan user);
+
+    TaiKhoan login(String username, String password);
 }

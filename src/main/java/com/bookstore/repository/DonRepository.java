@@ -8,8 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface DonRepository extends JpaRepository<Don, Integer> {
-//    Don findDonById(Integer id);
-
-//    @Query("select oi from ChiTietDon oi where oi.order.id = :orderId")
-//    List<ChiTietDon> findChiTietDonByDonId(Integer orderId);
+    @Query("SELECT o FROM Don o WHERE o.account.accountId = ?1")
+    List<Don> findBy(Integer accountId);
+    List<ChiTietDon> findChiTietDonByOrderId(Integer orderId);
 }

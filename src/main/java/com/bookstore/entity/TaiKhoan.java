@@ -8,6 +8,7 @@ import lombok.Data;
 public class TaiKhoan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "account_id")
     private Integer accountId;
 
     private String username;
@@ -17,10 +18,10 @@ public class TaiKhoan {
     private String phone;
 
     @ManyToOne
-    @JoinColumn(name = "addressId", referencedColumnName = "addressId")
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private DiaChi address;
 
     @ManyToOne
-    @JoinColumn(name = "roleId", referencedColumnName = "roleId")
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private Role role;
 }

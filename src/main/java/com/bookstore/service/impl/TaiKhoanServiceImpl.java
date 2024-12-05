@@ -25,4 +25,9 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
     public TaiKhoan saveUser(TaiKhoan user) {
         return taiKhoanRepository.save(user);
     }
+
+    @Override
+    public TaiKhoan login(String username, String password) {
+        return taiKhoanRepository.findTaiKhoanByUsernameAndPassword(username, password);
+    }
 }

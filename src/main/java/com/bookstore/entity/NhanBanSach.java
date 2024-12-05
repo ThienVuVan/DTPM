@@ -8,13 +8,15 @@ import lombok.Data;
 public class NhanBanSach {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "book_copy_id")
     private Integer bookCopyId;
 
     private String isbn;
 
     @ManyToOne
-    @JoinColumn(name = "bookId", referencedColumnName = "bookId")
+    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
     private Sach book;
 
+    @Column(name = "book_condition")
     private String bookCondition;
 }

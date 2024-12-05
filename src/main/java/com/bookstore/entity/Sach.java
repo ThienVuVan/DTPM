@@ -8,6 +8,7 @@ import lombok.Data;
 public class Sach {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "book_id")
     private Integer bookId;
 
     private String title;
@@ -16,10 +17,10 @@ public class Sach {
     private Integer stock;
 
     @ManyToOne
-    @JoinColumn(name = "publisherId", referencedColumnName = "publisherId")
+    @JoinColumn(name = "publisher_id", referencedColumnName = "publisher_id")
     private NhaXuatBan publisher;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private LoaiSach category;
 }

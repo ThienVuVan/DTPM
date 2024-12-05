@@ -20,33 +20,29 @@ public class TaiKhoanController {
     private final DiaChiService diaChiService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody TaiKhoanDto taiKhoanDto){
-        TaiKhoan taiKhoan = taiKhoanService.retrieveByEmail(taiKhoanDto.getEmail());
-        if (taiKhoan.getEmail() == taiKhoanDto.getEmail() && taiKhoan.getPassword() == taiKhoanDto.getPassword()){
-            return ResponseEntity.ok(taiKhoanService.retrieveByEmail(taiKhoanDto.getEmail()));
+    public ResponseEntity<?> Login(@RequestBody TaiKhoanDto taiKhoanDto){
+        TaiKhoan taiKhoan = taiKhoanService.login(taiKhoanDto.getUsername(), taiKhoanDto.getPassword());
+        if(taiKhoan == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.status(403).body("invalid");
+        return new ResponseEntity<>(taiKhoan, HttpStatus.OK);
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<?> RetrieveTaiKhoanById(@RequestParam Integer userId){
-        TaiKhoan taiKhoan = taiKhoanService.retrieveById(userId);
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> RetrieveTaiKhoanById(@PathVariable Integer id){
+        TaiKhoan taiKhoan = taiKhoanService.retrieveById(id);
         return new ResponseEntity<>(taiKhoan, HttpStatus.OK);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Object> CreateUser(@RequestBody TaiKhoanDto taiKhoanDto){
+    public ResponseEntity<Object> CreateUser(@RequestBody TaiKhoanDto taiKhoanDto) {
         TaiKhoan taiKhoan = new TaiKhoan();
         taiKhoan.setUsername(taiKhoanDto.getUsername());
-        taiKhoan.setPassword(taiKhoanDto.getUsername());
-        taiKhoan.setFullName(taiKhoanDto.getUsername());
-        taiKhoan.setEmail(taiKhoanDto.getUsername());
-        taiKhoan.setPhone(taiKhoanDto.getUsername());
-        DiaChi diaChi = diaChiService.retrieveById(taiKhoanDto.getAddress_id());
-        Role role = roleService.retrieveById(taiKhoanDto.getRole_id());
-        taiKhoan.setAddress(diaChi);
-        taiKhoan.setRole(role);
-        taiKhoanService.saveUser(taiKhoan);
-        return new ResponseEntity<>(HttpStatus.OK);
+        taiKhoan.setPassword(taiKhoanDto.getPassword());
+        taiKhoan.setEmail(taiKhoanDto.getEmail());
+        taiKhoan.setFullName(taiKhoanDto.getFullName());
+        taiKhoan.setPhone(taiKhoanDto.getPhone());
+        taiKhoan.setRole(roleService.retrieveById(2)); //default Role is USER
+        return new ResponseEntity<>(taiKhoanService.saveUser(taiKhoan), HttpStatus.CREATED);
     }
 }

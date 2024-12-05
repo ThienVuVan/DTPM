@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -15,22 +16,22 @@ public class SachServiceImpl implements SachService {
 
     @Override
     public Sach saveSach(Sach book) {
-        return null;
+        return sachRepository.save(book);
     }
 
     @Override
     public Sach updateSach(Sach book) {
-        return null;
+        return sachRepository.save(book);
     }
 
     @Override
     public void deleteSach(Sach book) {
-
+        sachRepository.delete(book);
     }
 
     @Override
     public Sach retrieveById(Integer id) {
-        return null;
+        return sachRepository.findById(id).orElse(null);
     }
 
     @Override

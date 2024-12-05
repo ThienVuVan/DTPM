@@ -8,7 +8,9 @@ import lombok.Data;
 public class LoaiSach {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "category_id")
     private Integer categoryId;
 
+    @Column(name = "category_name")
     private String categoryName;
 }
